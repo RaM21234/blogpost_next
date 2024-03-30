@@ -2,10 +2,13 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../schema";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { setUserData, setUserDataSlice } from "../../../../store/userSlice";
+
 
 export default function Page() {
   const router = useRouter();
+
   // Define initial form values
   const initialValues = {
     email: "",
@@ -30,8 +33,10 @@ export default function Page() {
       }
 
       const data = await response.json();
-      console.log("Signup response ", data);
+      console.log("Login response ", data);
+      setUserData(data)
       sessionStorage.setItem("token", data.token);
+      sessionStorage.setItem("userId", data.data._id);
       router.push("/frontend");
     } catch (error) {
       console.error("Error:", error);

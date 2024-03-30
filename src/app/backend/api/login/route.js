@@ -42,9 +42,10 @@ export async function POST(request) {
       await connectToMongoDB();
       const user = await User.findOne({ email, password }).exec();
       if (user) {
+        console.log("user from mongo db ", user)
         // Authentication successful
         return NextResponse.json(
-          { success: true, message: "Login successful", token: token },
+          { success: true, message: "Login successful", token: token, data: user },
           { status: 200 }
         );
       } else {

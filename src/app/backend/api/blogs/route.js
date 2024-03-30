@@ -19,17 +19,24 @@ const connectToMongoDB = async () => {
   }
 };
 
-export async function GET() {
+export async function GET(request) {
   try {
+    const userId = request.headers.get('User-Id'); // Get the value of 'User-Id' header
+    console.log("user id ", userId)
+    if (!userId) {
+      throw new Error('User ID not provided in headers');
+    }
+
     await connectToMongoDB();
-    let data = await Blog.find();
-    // console.log(data);
+
+    // Use the user ID to search for blog posts by that author
+    let data = await Blog.find({ author: userId });
+
     return NextResponse.json({ result: data }, { status: 200 });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
 export async function POST(request) {
   const payload = await request.json();
   console.log("blog payload", payload);
