@@ -3,7 +3,7 @@ import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginSchema } from "../schema";
 import { useRouter } from "next/navigation";
-import { setUserData, setUserDataSlice } from "../../../../store/userSlice";
+import { setUserData } from "../../../../store/userSlice";
 
 
 export default function Page() {
@@ -20,7 +20,7 @@ export default function Page() {
     // Perform form submission logic here
     console.log("Form values:", values);
     try {
-      const response = await fetch("http://localhost:3000/backend/api/login", {
+      const response = await fetch("http://localhost:3000/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -37,7 +37,7 @@ export default function Page() {
       setUserData(data)
       sessionStorage.setItem("token", data.token);
       sessionStorage.setItem("userId", data.data._id);
-      router.push("/frontend");
+      router.push("/pages");
     } catch (error) {
       console.error("Error:", error);
     }
@@ -98,7 +98,7 @@ export default function Page() {
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 disabled={isSubmitting}
               >
-                Sign In
+                Login
               </button>
               <a
                 href="#"

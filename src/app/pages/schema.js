@@ -16,4 +16,9 @@ const signupSchema = Yup.object().shape({
     .min(6, "Password must be at least 6 characters long"),
 });
 
-export { loginSchema, signupSchema };
+const blogPostSchema = Yup.object().shape({
+  title: Yup.string().required("Title is required"),
+  content: Yup.string().required("Content is required"),
+  tags: Yup.string().required("tags are required"),
+});
+export { loginSchema, signupSchema, blogPostSchema };

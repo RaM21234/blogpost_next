@@ -1,7 +1,7 @@
-import { MONGO_URI } from "@/app/backend/db";
 import { NextResponse } from "next/server";
-import User from "@/app/backend/models/User";
 import mongoose from "mongoose";
+import { MONGO_URI } from "@/app/utils/db";
+import User from "@/app/models/User";
 
 const connectToMongoDB = async () => {
   if (mongoose.connection.readyState === 1) {

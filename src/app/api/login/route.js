@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
-import User from "../../models/User";
-import { MONGO_URI } from "../../db";
 import jwt from "jsonwebtoken";
+import { MONGO_URI } from "@/app/utils/db";
+import User from "@/app/models/User";
 
 const secretKey = process.env.JWT_SECRET;
 console.log(secretKey);

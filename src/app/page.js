@@ -1,11 +1,11 @@
-import Image from "next/image";
 
-export default function Home() {
+
+
+export default function page() {
+
+
   return (
-    <>
-      <div class="text-4xl text-center">
-        Hello this is my first Next js project
-      </div>
-    </>
+    <div>Loading...</div>
   );
 }
+

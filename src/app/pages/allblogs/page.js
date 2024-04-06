@@ -1,10 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
 
 const page = () => {
-    const id = sessionStorage.getItem('userId')
-    console.log(id)
 
     const [allBlog, setallBlog] = useState();
 
@@ -12,12 +9,11 @@ const page = () => {
         async function fetchData() {
             try {
                 const response = await fetch(
-                    `http://localhost:3000/backend/api/blogs`,
+                    `http://localhost:3000/api/allblogs`,
                     {
                         method: "GET",
                         headers: {
                             "Content-Type": "application/json",
-                            "User-Id": sessionStorage.getItem("userId"),
                         },
                     }
                 );
@@ -37,6 +33,13 @@ const page = () => {
         fetchData();
     }, []);
 
+    const handleDelete = () => {
+        console.log("clicked delete")
+    }
+    const handleEdit = () => {
+        console.log("clicked edit")
+    }
+
 
     return (
         <div>
@@ -45,7 +48,6 @@ const page = () => {
                 <div key={blog?._id} class="my-2 mx-2">
                     <h2>title: {blog?.title}</h2>
                     <p>content: {blog?.content}</p>
-                    <p>Author: {blog?.author}</p>
                     <p>Tags: {blog?.tags.join(', ')}</p>
                     <p>Created At: {new Date(blog?.createdAt).toLocaleString()}</p>
                     <p>Updated At: {new Date(blog?.updatedAt).toLocaleString()}</p>
